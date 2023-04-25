@@ -1,0 +1,100 @@
+/* Comandos de DDL */
+/* Criar o banco de dados*/
+create database dbescola;
+
+/* Selecionar o banco de dados */
+use dbescola;
+
+/* Criar tabelas */
+CREATE TABLE avaliacao(
+    id int(11) not null AUTO_INCREMENT PRIMARY KEY,
+    turma varchar(10) NOT NULL,
+    nota1 decimal(5, 2) NULL,
+    nota2 decimal(5, 2) NULL,
+    media decimal(5, 2) NULL,
+    resultado varchar(30) NULL,
+    matricula int not null,
+    foreign key (matricula) references aluno(matricula)
+);
+
+/* Altera estrutura da tabela*/
+alter table
+    avaliacao
+add
+    matricula int not null
+after
+    resultado,
+add
+    foreign key (matricula) references aluno(matricula);
+
+/*Remove elementos da estrutura da table*/
+alter table
+    avaliacao drop column turma;
+
+ALTER TABLE
+    aluno
+ADD
+    ativo BOOLEAN NOT NULL DEFAULT TRUE
+AFTER
+    data_nasc;
+
+/* remove a tabela do banco de dados*/
+drop table avaliacao;
+
+/* Comandos de DML*/
+/*Adicionar registro no banco de dados*/
+INSERT into
+    aluno (nome, email, senha) value(
+        "Fabiano Moreira",
+        "fabianomoreira@email.com",
+        "123456"
+    );
+
+INSERT into
+    aluno (nome, email, senha) value ("Ana Silva", "anasilva@email.com", "123456"),
+    ("Pedro Silva", "pedrosilva@email.com", "123456");
+
+/* Seleciona dados no banco de dados */
+SELECT
+    matricula,
+    nome,
+    email,
+    data_nasc
+FROM
+    aluno;
+
+/* Atualiza dados no banco de dados */
+UPDATE
+    aluno
+SET
+    nome = "Carlos Cunha",
+    email = "carlos@email.com"
+WHERE
+    matricula = 3;
+
+UPDATE
+    aluno
+SET
+    nome = "Maria das Dores",
+    email = "mariadores@email.com"
+WHERE
+    matricula = 4;
+
+    /* funcionario
+    Nome: 
+    Cargo:
+    Email:
+    Senha:
+    Ativo*/
+
+
+    CREATE TABLE cadastrofuncionario(
+    id int(11) not null AUTO_INCREMENT PRIMARY KEY,
+    Nome varchar(10) NOT NULL,
+   Cargo varchar(150) NULL,
+    Email varchar(150)) NULL,
+    Senha varchar(150)) NULL,
+   Ativo tinyint(1) NULL,
+
+
+);
