@@ -3,10 +3,10 @@ include_once("DAO.php");
 
 class FuncionarioService
 {
-    function add(funcionario $funcionario)
+    function add(Funcionario $funcionario)
     {
         try {
-            $sql = "INSERT INTO funcionario (nome, email, senha, cargo) VALUES (:nome, :email, MD5(:senha), :cargo)";
+            $sql = "INSERT INTO funcionarios (nome, email, senha, cargo) VALUES (:nome, :email, MD5(:senha), :cargo)";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql); //Iniciar o preparativo para o envio dos dados ao banco;
@@ -23,7 +23,7 @@ class FuncionarioService
     function getAll()
     {
         try {
-            $sql = "SELECT id, nome, email, cargo, senha  FROM funcionario WHERE ativo = true";
+            $sql = "SELECT id, nome, email, cargo, senha  FROM funcionarios WHERE ativo = true";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql);
@@ -38,7 +38,7 @@ class FuncionarioService
     function get(int $id)
     {
         try {
-            $sql = "SELECT id nome, email, cargo, senha FROM funcionario WHERE ativo = true AND id = :id";
+            $sql = "SELECT id, nome, email, cargo, senha FROM funcionarios WHERE ativo = true AND id = :id";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql);
@@ -54,7 +54,7 @@ class FuncionarioService
     function update(Funcionario $funcionario)
     {
         try {
-            $sql = "UPDATE funcionario SET nome = :nome, email = :email WHERE id = :id";
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email WHERE id = :id";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql);
@@ -71,7 +71,7 @@ class FuncionarioService
     {
         try {
             //$sql = "DELETE FROM aluno WHERE matricula = :matricula";
-            $sql = "UPDATE funcionario SET ativo = false WHERE id = :id";
+            $sql = "UPDATE funcionarios SET ativo = false WHERE id = :id";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql);
@@ -88,7 +88,7 @@ class FuncionarioService
     function login(string $email, string $senha)
     {
         try {
-            $sql = "SELECT id, nome, email, ativo FROM funcionario WHERE ativo = true AND email = :email AND senha = MD5(:senha)";
+            $sql = "SELECT id, nome, email, ativo FROM funcionarios WHERE ativo = true AND email = :email AND senha = MD5(:senha)";
             $dao = new DAO;
             $conn = $dao->connect();
             $stman = $conn->prepare($sql);

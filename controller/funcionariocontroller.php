@@ -1,9 +1,9 @@
 <?php
-include_once("services/funcionarioserviceservice.php");
-include_once("model/funcionariomodel.php");
+include_once("service/funcionarioservice.php");
+include_once("model/funcionario.php");
 
 
-class funcionarioController
+class FuncionarioController
 {
     function postfuncionario()
     {
@@ -14,17 +14,20 @@ class funcionarioController
             //json_deconde: converte texto(json) em objeto
             $dadosRequest = json_decode($body);
 
-            $funcionario = new funcionario();
+            $funcionario = new Funcionario();
             $funcionario->mount($dadosRequest);
 
             //Valida o funcionario no sistema
             $funcionario->valid();
 
-            $funcionarioService = new funcionarioService();
-            if ($funcionario->id != null && $funcionario->id != "" && $funcionario->$$funcionario!= 0); {
+            $funcionarioService = new FuncionarioService();
+            if ($funcionario->id != null && $funcionario->id != "" && $funcionario->id!= 0) {
                 $funcionarioService->update($funcionario);
                 echo json_encode(array("message" => "Atualizado!"));
+            }
             
+                else
+            {
             
                 $funcionarioService->add($funcionario);
                 echo json_encode(array("message" => "Cadastrado!"));
@@ -39,12 +42,12 @@ class funcionarioController
     }
     
 
-    function getfuncionario()
+    function getFuncionario()
     {
         try {
             $body = file_get_contents('php://input');
             $dadosRequest = json_decode($body);
-            $funcionarioService = new funcionarioService();
+            $funcionarioService = new FuncionarioService();
             if (isset($dadosRequest->id)) {
                 $result = $funcionarioService->get($dadosRequest->id);
             } else {
@@ -57,7 +60,7 @@ class funcionarioController
         }
     }
 
-    function putfuncionario()
+    function putFuncionario()
     {
         try {
             //file_get_contents: Pega dados do body contidos no request
@@ -66,13 +69,13 @@ class funcionarioController
             //json_deconde: converte texto(json) em objeto
             $dadosRequest = json_decode($body);
 
-            $funcionario = new funcionario();
+            $funcionario = new Funcionario();
             $funcionario->mount($dadosRequest);
 
             //Valida o funcionario no sistema
             $funcionario->valid();
 
-            $funcionarioService = new funcionarioservice();
+            $funcionarioService = new Funcionarioservice();
             $funcionarioService->update($funcionario);
             echo json_encode(array("message" => "Atualizado!"));
         } catch (Exception $e) {
@@ -81,7 +84,7 @@ class funcionarioController
         }
     }
 
-    function funcionarioAluno()
+    function deleteFuncionario() 
     {
         try {
             $body = file_get_contents('php://input');
@@ -90,7 +93,7 @@ class funcionarioController
                 throw new Exception("Erros ao buscar parâmetros para remover!");
             }
 
-            $funcionarioService = new funcionarioService();
+            $funcionarioService = new FuncionarioService();
             $funcionarioService->delete($dadosRequest->matricula);
             echo json_encode(array("message" => "Dados removidos!"));
         } catch (Exception $e) {

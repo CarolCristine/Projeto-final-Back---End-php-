@@ -1,6 +1,6 @@
 <?php
 include_once("controller/funcionarioController.php");
-include_once("router/funcionariorouter.php");
+ include_once("router.php");
 
 
 router("post", "funcionario", function () {
@@ -9,20 +9,20 @@ router("post", "funcionario", function () {
 });
 router("post", "funcionario/login", function () {
     $FuncionarioController = new FuncionarioController();
-    $$FuncionarioController->loginFuncionario();
+    $FuncionarioController->loginFuncionario();
 });
 
 router("get", "funcionario", function () {
-    $fFncionarioController = new FuncionarioController();
-    $$FuncionarioController->getFuncionario();
+    $FuncionarioController = new FuncionarioController();
+    $FuncionarioController->getFuncionario();
 });
 
 router("put", "funcionario", function () {
     $FuncionarioController = new FuncionarioController();
-    $$FuncionarioController->getFuncionario();
+    $FuncionarioController->getFuncionario();
 });
 
 router("delete", "funcionario", function () {
     $FuncionarioController = new FuncionarioController();
-    $$FuncionarioController->deleteFuncionario();
+    $FuncionarioController->deleteFuncionario();
 });
